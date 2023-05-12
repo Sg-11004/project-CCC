@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Login Page</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body 
+    {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f1f1f1;
+      background-image:url('https://img.freepik.com/free-photo/abstract-grunge-decorative-relief-navy-blue-stucco-wall-texture-wide-angle-rough-colored-background_1258-28311.jpg?size=626&ext=jpg&ga=GA1.2.1954592200.1679673323&semt=robertav1_2_sidr')
+    }
+
+    .container {
+      width: 50%;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 40px;
+      background-color: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(5px);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    button[type="submit"] {
+      background-color:black;
+      color:whitesmoke;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    button[type="submit"]:hover {
+      background-color:skyblue;
+    }
+
+    .loader {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid black;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      align-self: center;
+      margin-top: 20px;
+      display: none;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <h1>Login</h1>
+      <form id="login-form">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+        <a href="ccc.html"><button type="submit" colour = "black">Log in</button></a>
+        <div class="loader"></div>
+        <p class="error-message" id="error-message"></p>
+      </form>
+    </div>
+    <script>
+ const form = document.getElementById("login-form");
+const usernameInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
+const errorMessage = document.getElementById("error-message");
+const loader = document.querySelector(".loader");
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (!validateUsername(usernameInput.value) || !validatePassword(passwordInput.value)) {
+    errorMessage.textContent = "Invalid username or password.";
+    return;
+  }
+  errorMessage.textContent = "";
+  loader.style.display = "block";
+  setTimeout(() => {
+    loader.style.display = "none";
+    alert("Login successful!");
+    window.location.href = "ccc.html";
+  }, 3000);
+});
+
+function validateUsername(username) {
+  // Username must be at least 4 characters long.
+  return username.length >= 4;
+}
+
+function validatePassword(password) {
+  // Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, and one number.
+  const uppercaseRegex = /[A-Z]/;
+  const lowercaseRegex = /[a-z]/;
+  const numberRegex = /[0-9]/;
+  return password.length >= 6 && uppercaseRegex.test(password) && lowercaseRegex.test(password) && numberRegex.test(password);
+}
+
+</script>
+</body>
+</html>
